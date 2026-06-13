@@ -6,16 +6,29 @@
 //
 
 import SwiftUI
+import Combine
 
 struct ContentView: View {
+    @StateObject private var rag = RAGService()
+
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            ChatView()
+                .tabItem {
+                    Label("Chat", systemImage: "bubble.left.and.bubble.right.fill")
+                }
+
+            DocumentsView()
+                .tabItem {
+                    Label("Documents", systemImage: "doc.fill")
+                }
+
+            SettingsView()
+                .tabItem {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
         }
-        .padding()
+        .environmentObject(rag)
     }
 }
 
